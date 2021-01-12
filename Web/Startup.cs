@@ -8,6 +8,7 @@ using Infrastructure.UnitOfWork;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,8 +30,13 @@ namespace Web
             services.AddControllersWithViews();
             services.AddDbContext<DataContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("MyPortfolioDB"));
+                options.UseSqlServer(configuration.GetConnectionString("AganceStoreDB"));
             });
+
+
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+              .AddEntityFrameworkStores<DataContext>();
+
 
             services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>)) ;
         }
