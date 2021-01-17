@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,11 +35,20 @@ namespace Web
             });
 
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-              .AddEntityFrameworkStores<DataContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+             .AddEntityFrameworkStores<DataContext>().AddDefaultTokenProviders().AddDefaultUI();
+
+            //services.AddIdentity<IdentityUser, IdentityRole>()
+            //    .AddEntityFrameworkStores<DataContext>()
+            //       .AddDefaultTokenProviders()
+            //                .AddDefaultUI();
 
 
+            services.AddControllersWithViews();
+            
             services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>)) ;
+            services.AddRazorPages();
+   
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,8 +59,13 @@ namespace Web
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
+
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
@@ -58,6 +73,7 @@ namespace Web
                     "defaultRoute",
                     "{controller=Home}/{action=Index}/{id?}"
                     );
+                endpoints.MapRazorPages();
             });
         }
     }

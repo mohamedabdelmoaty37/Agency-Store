@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
     <None Include="wwwroot\fonts\webfonts\fa-brands-400.svg" />
     <None Include="wwwroot\fonts\webfonts\fa-brands-400.woff2" />
     <None Include="wwwroot\fonts\webfonts\fa-regular-400.svg" />
@@ -33,6 +34,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0">
       <PrivateAssets>all</PrivateAssets>

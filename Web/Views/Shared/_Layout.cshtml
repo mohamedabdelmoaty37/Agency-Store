@@ -46,10 +46,20 @@
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="~/Home#about">About</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="~/Home#team">Team</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="~/Home#contact">Contact</a></li>
-                   <li class="nav-item"><a class="nav-link js-scroll-trigger" href="~/Accounts/login">Login</a></li>
-                   <li class="nav-item"><a class="nav-link js-scroll-trigger" href="~/Accounts/Register">Register</a></li>
+                    @*<li class="nav-item"><a di class="nav-link js-scroll-trigger" href="~/Accounts/login">Login</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="~/Accounts/Register">Register</a></li>*@
 
-               
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="">.</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                    </li>
+
+
                 </ul>
             </div>
         </div>
@@ -79,6 +89,11 @@
             </div>
         </div>
     </footer>
+
+
+    @section Scripts {
+        @RenderSection("Scripts", required: false)
+    }
 
     <!-- Bootstrap core JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
