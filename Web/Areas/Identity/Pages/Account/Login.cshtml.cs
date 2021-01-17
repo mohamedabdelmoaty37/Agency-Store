@@ -92,46 +92,30 @@ namespace Web.Areas.Identity.Pages.Account
 
         {
 
-
             if (ModelState.IsValid)
             {
+                var result = await _signInManager.PasswordSignInAsync(
+                    Input.Email, Input.Password, Input.RememberMe, false);
 
-
-
-
-
-
-                var user = _userManager.FindByEmailAsync(Input.Email);
-
-              //await _signInManager.CheckPasswordSignInAsync(user, Input.Password, false);
-
-
-                if ((await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, false)).Succeeded)
+                if (result.Succeeded)
                 {
-                    
+                    return RedirectToAction("index", "home");
+                }
 
-                    _logger.LogInformation("User logged in.");
-                    return Redirect("~/Home/Index");
-                }
-                // if (result.RequiresTwoFactor)
-                //{
-                //    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
-                //}
-                //if (result.IsLockedOut)
-                //{
-                //    _logger.LogWarning("User account locked out.");
-                //    return RedirectToPage("./Lockout");
-                //}
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return Page();
-                }
+                ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
             }
 
-            // If we got this far, something failed, redisplay form
             return Page();
         }
+
+
+
+
+
+
+            // If we got this far, something failed, redisplay form
+           
+        
 
         public async Task<IActionResult> OnPostSendVerificationEmailAsync()
         {
