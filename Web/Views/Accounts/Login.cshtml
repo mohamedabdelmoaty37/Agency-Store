@@ -43,9 +43,9 @@
 
                         <div class="row">
                             <div class="col-lg-6 d-none d-lg-block">
-                                <img src="~/assets/img/Login.jpg" style="height:610px; width:580px ;" alt="login " />
+                                <img src="~/assets/img/Login.jpg" style="height:550px; width:580px ;" alt="login " />
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6" style=" height:530px">
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="btn btn-google btn-user btn-block ">Welcome Back!</h1>
@@ -105,21 +105,14 @@
                                             <hr>
 
                                             <button type="submit" class="btn btn-primary btn-user btn-block"> Login</button>
-
-
-                                            @*<a href="index.html" class="btn btn-primary btn-user btn-block">
-                Login
-            </a>*@
-                                            <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                                <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                                            </a>
+                      
                                     </form>
                                     <hr>
-                                    <div class="text-center">
+                                    @*<div class="text-center">
                                         <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                    </div>
+                                    </div>*@
                                     <div class="text-center">
-                                        <a class="small" href="register.html">Create an Account!</a>
+                                        <a class="small btn btn-google" asp-action="Register">Create an Account!</a>
                                     </div>
                                 </div>
                             </div>

@@ -1,4 +1,4 @@
-﻿  @inject SignInManager<IdentityUser> SignInManager
+﻿ 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,13 +45,18 @@
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="~/Home#about">About</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="~/Home#team">Team</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="~/Home#contact">Contact</a></li>
-                    @*<li class="nav-item"><a di class="nav-link js-scroll-trigger" href="~/Accounts/login">Login</a></li>
-        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="~/Accounts/Register">Register</a></li>*@
-
+               
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-page="">.</a>
                     </li>
-                    @if (SignInManager.IsSignedIn(User))
+
+
+              
+
+
+                    <partial  name="_LoginPartial.cshtml"> 
+
+                    @*@if (SignInManager.IsSignedIn(User))
                     {
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger">Welcom @User.Identity.Name</a>
@@ -63,9 +68,7 @@
                     }
                     else
                     {
-                        @*<li class="nav-item">
-                <a class="nav-link js-scroll-trigger" asp-area="Identity" asp-page="/Account/Login">Login</a>
-            </li>*@
+              
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" asp-controller="Accounts" asp-action="Login">Login</a>
                         </li>
@@ -74,7 +77,7 @@
                             <a class="nav-link js-scroll-trigger" asp-controller="Accounts" asp-action="Register">Register</a>
                         </li>
 
-                    }
+                    }*@
 
 
                 </ul>

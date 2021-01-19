@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Entities;
 using Core.Interfaces;
 using Infrastructure;
 using Infrastructure.UnitOfWork;
@@ -35,10 +36,10 @@ namespace Web
             });
 
 
-            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
              .AddEntityFrameworkStores<DataContext>().AddDefaultTokenProviders().AddDefaultUI();
 
-            //services.AddIdentity<IdentityUser, IdentityRole>()
+            //services.AddIdentity<ApplicationUser, IdentityRole>()
             //    .AddEntityFrameworkStores<DataContext>()
             //       .AddDefaultTokenProviders()
             //                .AddDefaultUI();

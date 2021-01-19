@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -19,8 +20,27 @@ namespace Web.ViewModels
 
         [Required]
 
-        [Display(Name = "UserName")]
-        public string UserName { get; set; }
+        [Display(Name = "FirstName")]
+        public string FirstName { get; set; }
+
+        [Required]
+
+        [Display(Name = "LastName")]
+        public string LastName { get; set; }
+
+
+
+        [Required]
+
+        [Display(Name = "Address")]
+        public string Address { get; set; }
+
+
+        [Display(Name = "ImageUrl")]
+        public string ImageUrl { get; set; }
+        public  IFormFile File { get; set; }
+
+
 
         [Required]
 

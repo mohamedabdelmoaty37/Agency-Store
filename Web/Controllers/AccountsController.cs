@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Entities;
 using Core.Interfaces;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Web.ViewModels;
@@ -12,19 +15,24 @@ namespace Web.Controllers
     public class AccountsController : Controller
     {
 
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly IUnitOfWork<IdentityUser> _User;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IUnitOfWork<ApplicationUser> _User;
+        [Obsolete]
+        private readonly IHostingEnvironment _hosting;
 
-        public AccountsController(SignInManager<IdentityUser> signInManager, IUnitOfWork<IdentityUser> User, UserManager<IdentityUser> userManager
+        [Obsolete]
+        public AccountsController(IHostingEnvironment hosting,SignInManager<ApplicationUser> signInManager, IUnitOfWork<ApplicationUser> User, UserManager<ApplicationUser> userManager
             )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _User = User;
+            _hosting = hosting;
+
         }
 
-
+        [HttpGet]
         public IActionResult Login()
         {
             return View();
@@ -74,24 +82,42 @@ namespace Web.Controllers
         }
 
         [HttpPost]
+        [Obsolete]
         public async Task<IActionResult> Register(RegistervViewModel Model)
 
         {
 
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Model.UserName, PhoneNumber = Model.phone, Email = Model.Email, PasswordHash = Model.Password };
+
+                if (Model.File != null)
+                {
+                    string uploads = Path.Combine(_hosting.WebRootPath, @"img\ImageUsers");
+                    string fullPath = Path.Combine(uploads, Model.File.FileName);
+                    Model.File.CopyTo(new FileStream(fullPath, FileMode.Create));
+                }
+
+
+                var user = new ApplicationUser {
+                    UserName = Model.FirstName,
+                    LastName=Model.LastName,
+                    Address=Model.Address,
+                    PhoneNumber = Model.phone,
+                    Email = Model.Email,
+                    PasswordHash = Model.Password ,
+                    Image=Model.File.FileName
+                
+                };
+               
+                
+                
                 var result = await _userManager.CreateAsync(user);
 
                 if (result.Succeeded)
 
 
                 {
-
-
-                    return RedirectToAction("Accounts", "Login");
-
-
+                    return RedirectToAction("Login");
 
                 }
                 foreach (var error in result.Errors)

@@ -37,7 +37,7 @@
                 <!-- Nested Row within Card Body -->
                 <div class="row">
                     <div class="col-lg-5 d-none d-lg-block ">
-                        <img src="~/assets/img/register.jpg " style="height:700px; width:490px ;" alt="login " />
+                        <img src="~/assets/img/register.jpg " style="height:800px; width:490px ;" alt="login " />
 
                     </div>
 
@@ -49,14 +49,19 @@
                             <div class="text-center">
                                 <h1 class="btn btn-google btn-user btn-block ">Create an Account!</h1>
                             </div>
-                            <form class="user" asp-action="Register" method="post">
-
-                                <div asp-validation-summary="All" class="text-danger"></div>
+                            <form class="user" asp-action="Register" method="post" enctype="multipart/form-data">
 
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" asp-for="UserName"
-                                           placeholder="User Name ...">
-                                    <span asp-validation-for="UserName" class="text-danger"></span>
+                                    <input type="text" class="form-control form-control-user" asp-for="FirstName"
+                                           placeholder="FirstName...">
+                                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" asp-for="LastName"
+                                           placeholder="LastName...">
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
                                 </div>
 
 
@@ -65,22 +70,37 @@
                                            placeholder="Email Address">
                                     <span asp-validation-for="Email" class="text-danger"></span>
                                 </div>
+
+
+
+
+
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" asp-for="phone"
-                                           placeholder="Phone Number ">
-                                    <span asp-validation-for="phone" class="text-danger"></span>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-user" asp-for="Address"
+                                               placeholder="Address...">
+                                        <span asp-validation-for="Address" class="text-danger"></span>
+                                    </div>
+
                                 </div>
 
 
+                                <div class="form-group ">
+
+                                    <input type="text" class="form-control form-control-user" asp-for="phone"
+                                           placeholder="Phone Number ">
+                                    <span asp-validation-for="phone" class="text-danger"></span>
 
 
+                                </div>
 
 
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" class="form-control form-control-user"
                                                asp-for="Password" placeholder="Password">
-                                        <span asp-validation-for="phone" class="text-danger"></span>
+                                        <span asp-validation-for="Password" class="text-danger"></span>
 
                                     </div>
 
@@ -97,23 +117,23 @@
                                 </div>
 
 
+                                <div class="form-group ">
+                                    <label class="col-4" style="text-size-adjust:auto ;margin-left:13px ;color:blue"> Select Images  : </label>
+
+                                    <input type="file" class="form-control form-control-user " asp-for="File"
+>
+
+                                </div>
 
                                 <hr>
                                 <button type="submit" class="btn btn-primary btn-user btn-block">Register</button>
 
-                                @*<a href="index.html" class="btn btn-google btn-user btn-block">
-                                    <i class="fab fa-google fa-fw"></i> Register with Google
-                                       </a>*@
-                                <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                    <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
-                                </a>
+
                             </form>
                             <hr>
+                            
                             <div class="text-center">
-                                <a class="small" href="forgot-password.html">Forgot Password?</a>
-                            </div>
-                            <div class="text-center">
-                                <a class="small" href="login.html">Already have an account? Login!</a>
+                                <a class="small btn btn-google"  asp-action="Login">Already have an account? Login!</a>
                             </div>
                         </div>
                     </div>
