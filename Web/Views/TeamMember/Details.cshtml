@@ -1,0 +1,144 @@
+﻿@model Core.Entities.TeamMember
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+<div class="card">
+
+    <div class="card-header">
+        <h4>   Dedalis Item of Team Members</h4>
+    </div>
+
+    <div class="card-body  ">
+
+
+
+        <div class="table-responsive " style="margin-left:130px ;margin-top:30px">
+
+
+
+            <table class="table table-bordered" style="width:70%">
+                <thead>
+                    <tr>
+                        <th style="width:40%">
+                            Item
+                        </th>
+                        <th style="width:60%">
+                            Value
+                        </th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+
+
+
+                    <tr>
+                        <td style="width:40%">
+                            @Html.DisplayNameFor(model => model.FullName)
+                        </td>
+                        <td style="width:60%">
+                            @Html.DisplayFor(model => model.FullName)
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td style="width:40%">
+                            @Html.DisplayNameFor(model => model.TitleJob)
+                        </td>
+                        <td style="width:60%">
+                            @Html.DisplayFor(model => model.TitleJob)
+                        </td>
+
+                    </tr>
+
+
+
+
+                    <tr>
+                        <td style="width:40%">
+                            @Html.DisplayNameFor(model => model.FBUrllink)
+                        </td>
+                        <td style="width:60%">
+                            @Html.DisplayFor(model => model.FBUrllink)
+                        </td>
+
+                    </tr>
+
+
+
+
+                    <tr>
+                        <td style="width:40%">
+                            @Html.DisplayNameFor(model => model.TWUrllink)
+                        </td>
+                        <td style="width:60%">
+                            @Html.DisplayFor(model => model.TWUrllink)
+                        </td>
+
+                    </tr>
+
+
+
+
+                    <tr>
+                        <td style="width:40%">
+                            @Html.DisplayNameFor(model => model.LinkedInUrl)
+                        </td>
+                        <td style="width:60%">
+                            @Html.DisplayFor(model => model.LinkedInUrl)
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td style="width:40%">
+                            @Html.DisplayNameFor(model => model.ImageUrl)
+                        </td>
+                        <td style="width:60%">
+                            <img src="~/AdminRoot/img/Teammember/@Model.ImageUrl" alt="Null Image" style="width:200px; height:200px " />
+                        </td>
+
+                    </tr>
+
+
+
+
+
+                </tbody>
+            </table>
+
+        </div>
+
+
+    </div>
+    <div class="card-footer">
+        <div style="margin-left:400px">
+            <a class="btn btn-success btn-lg " asp-action="Edit" asp-controller="TeamMember" asp-route-id="@Model.Id">  <i class="fa fa-check "> </i> Edit </a>
+            <a asp-action="Index" class="btn btn-danger btn-lg" asp-controller="TeamMember">  <i class="fa fa-exclamation-circle "> </i> Back to List</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

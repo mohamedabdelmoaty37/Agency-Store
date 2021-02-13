@@ -93,7 +93,7 @@ namespace Web.Controllers
                 if (Model.File != null)
                 {
                     string uploads = Path.Combine(_hosting.WebRootPath, @"img\ImageUsers");
-                    string fullPath = Path.Combine(uploads, Model.File.FileName);
+                    string fullPath = Path.Combine(uploads, Model.FirstName+Model.LastName+ Model.File.FileName);
                     Model.File.CopyTo(new FileStream(fullPath, FileMode.Create));
                 }
 
@@ -105,8 +105,8 @@ namespace Web.Controllers
                     PhoneNumber = Model.phone,
                     Email = Model.Email,
                     PasswordHash = Model.Password ,
-                    Image=Model.File.FileName
-                
+                    Image= Model.FirstName + Model.LastName + Model.File.FileName
+
                 };
                
                 

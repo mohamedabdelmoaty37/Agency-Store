@@ -79,7 +79,7 @@
                         <h6 class="collapse-header"> Home Components:</h6>
                         <a class="collapse-item" href="buttons.html"> services</a>
                         <a class="collapse-item" href="cards.html">PortfolioItem</a>
-                        <a class="collapse-item" href="cards.html">Team Members</a>
+                        <a class="collapse-item" asp-controller="TeamMember" asp-action="Index">Team Members</a>
                         <a class="collapse-item" href="cards.html">PortfolioItem</a>
                     </div>
                 </div>
@@ -377,12 +377,10 @@
                     </ul>
 
                 </nav>
-                <!-- End of Topbar -->
-                <!-- Begin Page Content -->
-                <!-- /.container-fluid -->
+              
 
             </div>
-            <!-- End of Main Content -->
+           
 
 
             @RenderBody()
