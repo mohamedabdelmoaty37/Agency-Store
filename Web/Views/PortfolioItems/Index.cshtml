@@ -4,48 +4,103 @@
     ViewData["Title"] = "Index";
 }
 
-<div style="padding:120px;">
-    <h1>Index</h1>
 
-    <p>
-        <a asp-action="Create" class="btn btn-primary">Create New</a>
-    </p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.ProjectName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ImageUrl)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ProjectName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                       <img src="~/img/portfolio/@item.ImageUrl" class="img-thumbnail" style="width:64px; height:64px;" />
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id"><i class="fas fa-edit"></i></a> |
-                        <a asp-action="Details" asp-route-id="@item.Id"><i class="fas fa-eye"></i></a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id"><i class="fas fa-trash"></i></a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+<div class="container-fluid">
 
-</div>
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Team Member Page </h1>
+    <p class="mb-4">
+        DataTables is Date of Team Member Can Add New Item And Manage Options (Edit Or Display Details Or Delete)
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+
+                <h6 class="m-0 font-weight-bold text-dark">Team Member Items</h6>
+                <br />
+
+                <a asp-action="Create" class="btn btn-info">Create New Team Member Item</a>
+
+
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+
+
+
+                    @*<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th width="100px">
+                                    @Html.DisplayNameFor(model => model.Namecatogry)
+                                </th>
+                                <th width="100px">
+                                    @Html.DisplayNameFor(model => model)
+                                </th>
+                                <th width="80px">
+                                    @Html.DisplayNameFor(model => model.ImageUrl)
+                                </th>
+                                <th width="80px">
+                                    @Html.DisplayNameFor(model => model.FBUrllink)
+                                </th>
+                                <th width="90px">
+                                    @Html.DisplayNameFor(model => model.TWUrllink)
+                                </th>
+                                <th width="80px">
+                                    @Html.DisplayNameFor(model => model.LinkedInUrl)
+                                </th>
+                                <th width="700px">Manage options</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+
+                                var Image = item.ImageUrl ?? "TeamMemberimg.jpg";
+
+                                <tr>
+                                    <td width="200px">
+                                        @Html.DisplayFor(modelItem => item.FullName)
+                                    </td>
+                                    <td width="100px">
+                                        @Html.DisplayFor(modelItem => item.TitleJob)
+                                    </td>
+                                    <td style="width:80px">
+                                        <img style="width:45px;height:45px  ; margin:5px " src="~/AdminRoot/img/Teammember/@Image" />
+                                    </td>
+                                    <td style="width:100px">
+                                        @Html.DisplayFor(modelItem => item.FBUrllink)
+                                    </td>
+                                    <td style="width:100px">
+                                        @Html.DisplayFor(modelItem => item.TWUrllink)
+                                    </td>
+                                    <td style="width:100px">
+                                        @Html.DisplayFor(modelItem => item.LinkedInUrl)
+                                    </td>
+                                    <td style="width:400px">
+                                        <a asp-action="Edit" class=" btn btn-info btn-circle btn-lg" asp-route-id="@item.Id"> <i class="fa fa-check"></i> </a>
+                                        <a asp-action="Details" class=" btn btn-warning btn-circle btn-lg" asp-route-id="@item.Id"> <i class="fa fa-info-circle "></i></a>
+                                        <a asp-action="Delete" class=" btn btn-danger btn-circle btn-lg" onclick=" return confirm(' Are you sure to Delete this Item')" asp-route-id="@item.Id"> <i class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>*@
+                    @*fa-exclamation-triangle*@
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+

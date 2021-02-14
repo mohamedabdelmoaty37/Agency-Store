@@ -23,6 +23,9 @@ namespace Infrastructure
             modelBuilder.Entity<PortfolioItem>().Property(x => x.Id).HasDefaultValueSql("NEWID()");
             modelBuilder.Entity<TeamMember>().Property(x => x.Id).HasDefaultValueSql("NEWID()");
             modelBuilder.Entity<Services>().Property(x => x.Id).HasDefaultValueSql("NEWID()");
+            modelBuilder.Entity<Typecat>().Property(x => x.Id).HasDefaultValueSql("NEWID()");
+
+
 
 
 
@@ -41,5 +44,8 @@ namespace Infrastructure
         public DbSet<TeamMember> TeamMember { get; set; }
         public DbSet<Services> Services { get; set; }
         public DbSet<PortfolioItem> PortfolioItems { get; set; }
+        public DbSet<Typecat> Typecat { get; set; }
+
+
     }
 }

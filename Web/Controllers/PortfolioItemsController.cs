@@ -72,7 +72,7 @@ namespace Web.Controllers
 
                 PortfolioItem portfolioItem = new PortfolioItem
                 {
-                    ProjectName = model.ProjectName,
+                   /* ProjectName = model.ProjectName*/
                     Description = model.Description,
                     ImageUrl = model.File.FileName
                 };
@@ -103,8 +103,8 @@ namespace Web.Controllers
             {
                 Id = portfolioItem.Id,
                 Description = portfolioItem.Description,
-                ImageUrl = portfolioItem.ImageUrl,
-                ProjectName = portfolioItem.ProjectName
+                ImageUrl = portfolioItem.ImageUrl
+                //ProjectName = portfolioItem.ProjectName
             };
 
             return View(portfolioViewModel);
@@ -136,7 +136,7 @@ namespace Web.Controllers
                     PortfolioItem portfolioItem = new PortfolioItem
                     {
                         Id = model.Id,
-                        ProjectName = model.ProjectName,
+                        //ProjectName = model.ProjectName,
                         Description = model.Description,
                         ImageUrl = model.File.FileName
                     };
