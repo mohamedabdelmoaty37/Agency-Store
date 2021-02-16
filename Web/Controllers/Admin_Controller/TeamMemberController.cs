@@ -181,7 +181,7 @@ namespace Web.Controllers.Admin_Controller
         
         
         
-        public ActionResult Delete(Guid Id)
+        public ActionResult Delete(string Id)
 
         {    
                 if (Id!=null)

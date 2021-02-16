@@ -1,0 +1,145 @@
+﻿
+@model Core.Entities.ApplicationUser
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+<div class="card">
+
+    <div class="card-header">
+        <h4>   Detalis Item of Team Members</h4>
+    </div>
+
+    <div class="card-body  ">
+
+
+
+        <div class="table-responsive " style="margin-left:130px ;margin-top:30px">
+
+
+
+            <table class="table table-bordered" style="width:70%">
+                <thead>
+                    <tr style="background-color:darkgrey">
+                        <th style="width:30%">
+                            Item
+                        </th>
+                        <th style="width:70%">
+                            Value
+                        </th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    
+
+                    <tr>
+                        <td style= "width:30%; background-color:rgba(0,0,0,.15)">
+                            @Html.DisplayNameFor(model => model.UserName)
+                        </td>
+                        <td style="width:70%  ; background-color:rgba(0,0,0,.15)">
+                            @Html.DisplayFor(model => model.UserName)
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td style="width:30%">
+                            @Html.DisplayNameFor(model => model.LastName)
+                        </td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.LastName)
+                        </td>
+
+                    </tr>
+
+
+
+
+                    <tr>
+                        <td style="width:30% ; background-color:rgba(0,0,0,.15)">
+                            @Html.DisplayNameFor(model => model.Email)
+                        </td>
+                        <td style="width:70% ; background-color:rgba(0,0,0,.15)">
+                            @Html.DisplayFor(model => model.Email)
+                        </td>
+
+                    </tr>
+
+
+
+
+                    <tr>
+                        <td style="width:30% ">
+                            @Html.DisplayNameFor(model => model.PhoneNumber)
+                        </td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.PhoneNumber)
+                        </td>
+
+                    </tr>
+
+
+
+
+                    <tr>
+                        <td style="width:30% ; background-color:rgba(0,0,0,.15)">
+                            @Html.DisplayNameFor(model => model.Address)
+                        </td>
+                        <td style="width:70% ; background-color:rgba(0,0,0,.15)">
+                            @Html.DisplayFor(model => model.Address)
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td style="width:30% ">
+                            @Html.DisplayNameFor(model => model.Image)
+                        </td>
+                        <td style="width:70%">
+                            <img src="~/img/ImageUsers/@Model.Image" alt="Null Image" style="width:200px; height:200px " />
+                        </td>
+
+                    </tr>
+
+
+
+
+
+                </tbody>
+            </table>
+
+        </div>
+
+
+    </div>
+    <div class="card-footer">
+        <div style="margin-left:400px">
+            <a class="btn btn-success btn-lg " asp-action="Edit" asp-controller="User" asp-route-id="@Model.Id">  <i class="fa fa-check "> </i> Edit </a>
+            <a asp-action="Index" class="btn btn-danger btn-lg" asp-controller="User">  <i class="fa fa-exclamation-circle "> </i> Back to List</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

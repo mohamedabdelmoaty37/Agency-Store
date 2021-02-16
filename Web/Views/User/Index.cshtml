@@ -1,0 +1,125 @@
+﻿
+@model IEnumerable<Core.Entities.ApplicationUser>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+   int indexer = 0;
+
+
+}
+
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">User Manager Page </h1>
+    <p class="mb-4">
+        DataTables is Date of User Can Add New Item And Manage Options (Edit Or Display Details Or Delete)
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+
+                <h6 class="m-0 font-weight-bold text-dark">Team Member Items</h6>
+                <br />
+
+                <a asp-action="Create" class="btn btn-info">Create New Team Member Item</a>
+
+
+            </div>
+            <div class="card-body">
+                <div class="">
+
+                 
+
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr style="background-color:darkgrey">
+                                <th width="30px" >
+                                    N
+                                </th>
+
+                                <th>
+                                    @Html.DisplayNameFor(model => model.UserName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.LastName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Email)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Image)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Address)
+                                </th>
+                                <th width="450px">Manage options</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+
+                                var Image = item.Image ?? "TeamMemberimg.jpg";
+
+                            <tr>
+                                <td width="30px" style="background-color:rgba(0,0,0,.15)">
+                                   @( indexer=indexer+1)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UserName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LastName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+
+                                <td>
+                                    <img style="width:45px;height:45px  ; margin:5px " src="~/img/ImageUsers/@Image" />
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Address)
+                                </td>
+
+                                <td style="width:400px">
+                                    <a asp-action="Edit" asp-controller="User"  class=" btn btn-info btn-circle btn-lg" asp-route-id="@item.Id"> <i class="fa fa-check"></i> </a>
+                                    <a asp-action="Details" asp-controller="User"  class=" btn btn-warning btn-circle btn-lg" asp-route-id="@item.Id"> <i class="fa fa-info-circle "></i></a>
+                                    <a asp-action="Delete" asp-controller="User" class=" btn btn-danger btn-circle btn-lg" onclick=" return confirm(' Are you sure to Delete this Item')" asp-route-id="@item.Id"> <i class="fa fa-trash"></i></a>
+
+                                    <a href="#" class="btn btn-secondary btn-icon-split ">
+                                        <span class="icon text-white-50">
+
+                                            <i class="fas fa-fw fa-cog"></i>
+                                        </span>
+                                        <span class="text"> premissions User </span>
+                                    </a>
+
+
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                    @*fa-exclamation-triangle*@
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+

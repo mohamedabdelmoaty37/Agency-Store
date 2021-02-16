@@ -23,7 +23,7 @@
 
             <table class="table table-bordered" style="width:70%">
                 <thead>
-                    <tr>
+                    <tr style="background-color:darkgrey">
                         <th style="width:30%">
                             Item
                         </th>
@@ -52,10 +52,10 @@
                     @{var catogryvalue = catogry.Entity.GetAll().Where(x => x.Id == Model.typeId).Select(x => x.Typename).FirstOrDefault(); }
 
                     <tr>
-                        <td style="width:30%">
+                        <td style="width:30%  ; background-color:rgba(0,0,0,.15)">
                             @Html.DisplayNameFor(model => model.typeId)
                         </td>
-                        <td style="width:70%">
+                        <td style="width:70%  ; background-color:rgba(0,0,0,.15)">
                             @Html.DisplayFor(model => catogryvalue)
                         </td>
                     </tr>
@@ -74,10 +74,10 @@
                     </tr>
 
                     <tr>
-                        <td style="width:30%">
+                        <td style="width:30%  ; background-color:rgba(0,0,0,.15)">
                             @Html.DisplayNameFor(model => model.Description)
                         </td>
-                        <td style="width:70%">
+                        <td style="width:70%  ; background-color:rgba(0,0,0,.15)">
                             @Html.DisplayFor(model => model.Description)
                         </td>
 
@@ -85,15 +85,7 @@
 
 
 
-                    <tr>
-                        <td style="width:30%">
-                            @Html.DisplayNameFor(model => model.Company)
-                        </td>
-                        <td style="width:70%">
-                            @Html.DisplayFor(model => model.Company)
-                        </td>
 
-                    </tr>
 
 
 
@@ -104,6 +96,15 @@
                         </td>
                         <td style="width:70%">
                             @Html.DisplayFor(model => model.location)
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td style="width:30%  ; background-color:rgba(0,0,0,.15)">
+                            @Html.DisplayNameFor(model => model.Company)
+                        </td>
+                        <td style="width:70%  ; background-color:rgba(0,0,0,.15)">
+                            @Html.DisplayFor(model => model.Company)
                         </td>
 
                     </tr>
@@ -121,9 +122,9 @@
                     </tr>
 
                     <tr>
-                        <td style="width:30%">
+                        <td style="width:30%  ; background-color:rgba(0,0,0,.15)">
                             @Html.DisplayNameFor(model => model.Date)
-                        <td style="width:70%">
+                        <td style="width:70%  ; background-color:rgba(0,0,0,.15)">
                             @Html.DisplayFor(model => model.Date.Day)/     @Html.DisplayFor(model => model.Date.Month)/     @Html.DisplayFor(model => model.Date.Year)
 
                         </td>
