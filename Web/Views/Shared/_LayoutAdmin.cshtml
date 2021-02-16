@@ -78,7 +78,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header"> Home Components:</h6>
                         <a class="collapse-item" href="buttons.html"> services</a>
-                        <a class="collapse-item" asp-controller="PortfolioItems" asp-action="Index" >PortfolioItem</a>
+                        <a class="collapse-item" asp-controller="PortfolioItems" asp-action="Index">PortfolioItem</a>
                         <a class="collapse-item" asp-controller="TeamMember" asp-action="Index">Team Members</a>
                         <a class="collapse-item" href="cards.html">PortfolioItem</a>
                     </div>
@@ -96,9 +96,9 @@
                      data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header"> User Setting:</h6>
-                        <a class="collapse-item"  asp-action="Index" asp-controller="User">User </a>
-                        <a class="collapse-item"> Roles</a>
-                        <a class="collapse-item" >Other</a>
+                        <a class="collapse-item" asp-action="Index" asp-controller="User">User </a>
+                        <a class="collapse-item" asp-action="Index" asp-controller="Roles"> Roles</a>
+                        <a class="collapse-item">Other</a>
                     </div>
                 </div>
             </li>
@@ -348,8 +348,8 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"> @currentUser.UserName @currentUser.LastName</span>
-                                <img class="img-profile rounded-circle" src="~/img/ImageUsers/@(currentUser.Image!=null?currentUser.Image:"undraw_profile.svg")"         />
-                               
+                                <img class="img-profile rounded-circle" src="~/img/ImageUsers/@(currentUser.Image!=null?currentUser.Image:"undraw_profile.svg")" />
+
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -377,13 +377,15 @@
                     </ul>
 
                 </nav>
-              
+
 
             </div>
-           
+
 
 
             @RenderBody()
+
+
 
 
             <!-- Footer -->
@@ -442,6 +444,9 @@
     <!-- Page level custom scripts -->
     <script src="~/AdminRoot/js/demo/chart-area-demo.js"></script>
     <script src="~/AdminRoot/js/demo/chart-pie-demo.js"></script>
+
+
+    @RenderSection("scripts", required: false)
 
 </body>
 

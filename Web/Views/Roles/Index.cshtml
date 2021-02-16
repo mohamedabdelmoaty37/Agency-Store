@@ -1,0 +1,143 @@
+﻿
+@model IEnumerable<IdentityRole>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    int indexer = 0;
+
+
+}
+
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Roles  Manager Page </h1>
+    <p class="mb-4">
+        DataTables is Date of Roles Can Add New Item And Manage Options (Edit Or Display Details Or Delete)
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+
+                <h6 class="m-0 font-weight-bold text-dark">Roles  Items</h6>
+                <br />
+
+                <button type="button" id="target" class="btn btn-info">Create New Role </button>
+
+
+            </div>
+
+
+
+            <div class="row">
+
+
+
+
+
+
+
+                <div class="card-body">
+
+                    <table class="table table-bordered" id="dataTable" style="width:100% " cellspacing="0">
+                        <thead>
+                            <tr style="background-color:darkgrey">
+                                <th width="20px">
+                                    N
+                                </th>
+
+                                <th width="100px">
+                                    Role Name
+                                </th>
+
+                                <th>Manage options</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+
+
+                                <tr>
+                                    <td width="10px" style="background-color:rgba(0,0,0,.15)">
+                                        @( indexer=indexer+1)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+
+                                    <td style="width:400px">
+                                        <a asp-action="Edit" asp-controller="User" class=" btn btn-info btn-circle btn-lg" asp-route-id="@item.Id"> <i class="fa fa-check"></i> </a>
+                                        <a asp-action="Delete" asp-controller="User" class=" btn btn-danger btn-circle btn-lg" onclick=" return confirm(' Are you sure to Delete this Item')" asp-route-id="@item.Id"> <i class="fa fa-trash"></i></a>
+
+                                        <a href="#" class="btn btn-secondary btn-icon-split ">
+                                            <span class="icon text-white-50">
+
+                                                <i class="fas fa-fw fa-cog"></i>
+                                            </span>
+                                            <span class="text"> Users in Role </span>
+                                        </a>
+
+
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+                <div class=" card-body" style="width:30%">
+                    <div id="createpage" style="display:none">
+
+                        <partial name="CreateEditView"> </partial>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        @section scripts {
+
+            <script>
+                $("#target").click(function () {
+                   
+                 
+
+                    var x = document.getElementById("createpage");
+                    if (x.style.display === "none") {
+                        x.style.display = "block";
+                    } else {
+                        x.style.display = "none";
+                    }
+
+
+
+
+
+                   
+                });
+            </script>
+
+         
+        }
+

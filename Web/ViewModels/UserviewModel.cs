@@ -7,6 +7,19 @@ using System.Threading.Tasks;
 
 namespace Web.ViewModels
 {
+
+
+    public class RoleviewModel 
+    {
+
+
+        [Required]
+
+        [Display(Name = "RoleName")]
+        public string RoleName { get; set; }
+        public string Id { get; set; }
+
+    }
     public class UserviewModel
     {
 
