@@ -1,25 +1,27 @@
 ﻿@model IEnumerable<Core.Entities.PortfolioItem>
-
+@inject Core.Interfaces.IUnitOfWork<Typecat> catogry
 @{
     ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
 }
 
 
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Team Member Page </h1>
+    <h1 class="h3 mb-2 text-gray-800">Portfoliol Page </h1>
     <p class="mb-4">
-        DataTables is Date of Team Member Can Add New Item And Manage Options (Edit Or Display Details Or Delete)
+        DataTables is Date of Portfoliol Can Add New Item And Manage Options (Edit Or Display Details Or Delete)
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
 
-                <h6 class="m-0 font-weight-bold text-dark">Team Member Items</h6>
+                <h6 class="m-0 font-weight-bold text-dark">Portfoliol  Items</h6>
                 <br />
 
-                <a asp-action="Create" class="btn btn-info">Create New Team Member Item</a>
+                <a asp-action="Create" class="btn btn-info">Create New Portfoliol Item</a>
 
 
             </div>
@@ -28,28 +30,40 @@
 
 
 
-                    @*<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th width="100px">
+                                <th >
                                     @Html.DisplayNameFor(model => model.Namecatogry)
                                 </th>
-                                <th width="100px">
-                                    @Html.DisplayNameFor(model => model)
+                                <th >
+                                    @Html.DisplayNameFor(model => model.Typecat)
                                 </th>
-                                <th width="80px">
+                                <th >
+                                    @Html.DisplayNameFor(model => model.Title)
+                                </th>
+                                <th >
+                                    @Html.DisplayNameFor(model => model.Description)
+                                </th>
+                                <th>
                                     @Html.DisplayNameFor(model => model.ImageUrl)
                                 </th>
-                                <th width="80px">
-                                    @Html.DisplayNameFor(model => model.FBUrllink)
+                                <th >
+                                    @Html.DisplayNameFor(model => model.Company)
                                 </th>
-                                <th width="90px">
-                                    @Html.DisplayNameFor(model => model.TWUrllink)
+                                <th >
+                                    @Html.DisplayNameFor(model => model.location)
                                 </th>
-                                <th width="80px">
-                                    @Html.DisplayNameFor(model => model.LinkedInUrl)
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Price)
                                 </th>
-                                <th width="700px">Manage options</th>
+                                <th >
+                                    @Html.DisplayNameFor(model => model.Date)
+                                </th>
+                                <th  >
+                                    @Html.DisplayNameFor(model => model.gendertype)
+                                </th>
+                                <th style="width:400px">Manage options</th>
                             </tr>
                         </thead>
 
@@ -60,35 +74,60 @@
 
                                 var Image = item.ImageUrl ?? "TeamMemberimg.jpg";
 
+
+                                var catogryvalue = catogry.Entity.GetAll().Where(x => x.Id == item.typeId).Select(x => x.Typename).FirstOrDefault();
+
                                 <tr>
-                                    <td width="200px">
-                                        @Html.DisplayFor(modelItem => item.FullName)
+                                    <td >
+                                        @Html.DisplayFor(modelItem => item.Namecatogry)
                                     </td>
-                                    <td width="100px">
-                                        @Html.DisplayFor(modelItem => item.TitleJob)
+                                    <td>
+                                        @Html.DisplayFor(modelItem => catogryvalue)
                                     </td>
+
+                                    <td>
+                                        <div style="width:200px">
+                                            @Html.DisplayFor(modelItem => item.Title)
+                                            </div>
+                                    </td>
+                                    <td  >
+                                        <div style="width:200px" >
+                                            @Html.DisplayFor(modelItem => item.Description)
+                                        </div>
+                                    </td>
+
                                     <td style="width:80px">
-                                        <img style="width:45px;height:45px  ; margin:5px " src="~/AdminRoot/img/Teammember/@Image" />
+                                        <img style="width:45px;height:45px  ; margin:5px " src="~/AdminRoot/img/protofileitem/@Image" />
                                     </td>
-                                    <td style="width:100px">
-                                        @Html.DisplayFor(modelItem => item.FBUrllink)
+                                    <td >
+                                        @Html.DisplayFor(modelItem => item.Company)
                                     </td>
-                                    <td style="width:100px">
-                                        @Html.DisplayFor(modelItem => item.TWUrllink)
+                                    <td>
+                                        <div style="width:150px">
+                                            @Html.DisplayFor(modelItem => item.location)
+                                            </div>
                                     </td>
-                                    <td style="width:100px">
-                                        @Html.DisplayFor(modelItem => item.LinkedInUrl)
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Price)
                                     </td>
-                                    <td style="width:400px">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Date.Day)/@Html.DisplayFor(modelItem => item.Date.Month)/@Html.DisplayFor(modelItem => item.Date.Year)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.gendertype)
+                                    </td>
+                                    <td >
+                                        <div style="width:200px">
                                         <a asp-action="Edit" class=" btn btn-info btn-circle btn-lg" asp-route-id="@item.Id"> <i class="fa fa-check"></i> </a>
                                         <a asp-action="Details" class=" btn btn-warning btn-circle btn-lg" asp-route-id="@item.Id"> <i class="fa fa-info-circle "></i></a>
-                                        <a asp-action="Delete" class=" btn btn-danger btn-circle btn-lg" onclick=" return confirm(' Are you sure to Delete this Item')" asp-route-id="@item.Id"> <i class="fa fa-trash"></i></a>
-                                    </td>
+                                        <a asp-action="Delete" asp-controller="PortfolioItems" class=" btn btn-danger btn-circle btn-lg" onclick=" return confirm(' Are you sure to Delete this Item')" asp-route-id="@item.Id"> <i class="fa fa-trash"></i></a>
+                                    </div>
+                                            </td>
                                 </tr>
                             }
                         </tbody>
-                    </table>*@
-                    @*fa-exclamation-triangle*@
+                    </table>
+
                 </div>
             </div>
         </div>

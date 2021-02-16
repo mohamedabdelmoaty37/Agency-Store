@@ -7,8 +7,17 @@ using System.Threading.Tasks;
 
 namespace Web.ViewModels
 {
+
+
+
+
+
+
     public class PortfolioViewModel
     {
+
+
+        
         public Guid Id { get; set; }
         [Required]
 
@@ -17,17 +26,21 @@ namespace Web.ViewModels
 
         [Required]
 
-        [Display(Name = "ProjectName")]
+        [Display(Name = "Description")]
         public string Description { get; set; }
 
 
-        [Display(Name = "ProjectName")]
-        public string ImageUrl { get; set; }
-
         [Required]
 
-        [Display(Name = "Image")]
-        public IFormFile File { get; set; }
+        [Display(Name = "Price")]
+        public string Price { get; set; }
+
+
+
+        [Display(Name = "ImageUrl")]
+        public string ImageUrl { get; set; }
+
+        
         [Required]
 
         [Display(Name = "Title")]
@@ -55,6 +68,29 @@ namespace Web.ViewModels
         [Display(Name = "typeName")]
 
         public Guid typeId { get; set; }
-        
+
+
+
+
+
     }
+
+    public class PortfoliocreateViewModel : PortfolioViewModel
+    {
+
+        [Required]
+        [Display(Name = "Image")]
+        public IFormFile File { get; set; }
+    }
+
+    public class PortfoliEditViewModel : PortfolioViewModel
+    {
+
+       
+        [Display(Name = "Image")]
+        public IFormFile File { get; set; }
+    }
+
+
+
 }

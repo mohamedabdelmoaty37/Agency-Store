@@ -16,8 +16,10 @@ namespace Core.Entities
         public DateTime  Date { get; set; }
         public string Company { get; set; }
         public string location  { get; set; }
+        public string Price { get; set; }
 
-       [ForeignKey("Typecat")]
+
+        [ForeignKey("Typecat")]
         public Guid typeId { get; set; }
         public Typecat Typecat { get; set; }
 

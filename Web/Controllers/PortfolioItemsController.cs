@@ -17,12 +17,22 @@ namespace Web.Controllers
     public class PortfolioItemsController : Controller
     {
         private readonly IUnitOfWork<PortfolioItem> _portfolio;
+        private readonly IUnitOfWork<Typecat> _Typecatogry;
         private readonly IHostingEnvironment _hosting;
+        public List<GenderName> GenderName;
 
-        public PortfolioItemsController(IUnitOfWork<PortfolioItem> portfolio, IHostingEnvironment hosting)
+
+        public PortfolioItemsController(IUnitOfWork<PortfolioItem> portfolio, IUnitOfWork<Typecat> Typecatogry, IHostingEnvironment hosting)
         {
             _portfolio = portfolio;
             _hosting = hosting;
+            _Typecatogry = Typecatogry;
+            GenderName = new List<GenderName>()
+            {   new GenderName { Value = "male", Name = "male" },
+                new GenderName { Value = "female", Name = "female" },
+                new GenderName { Value = "All Gender", Name = "All Gender" }
+             };
+
         }
 
         // GET: PortfolioItems
@@ -48,42 +58,96 @@ namespace Web.Controllers
             return View(portfolioItem);
         }
 
+
+       
+
         // GET: PortfolioItems/Create
-        public IActionResult Create()
+        public ActionResult Create()
         {
+            
+
+            ViewBag.GenderName = new SelectList(GenderName , "Value", "Name");
+
+
+            ViewBag.CatogreName = new SelectList(_Typecatogry.Entity.GetAll(), "Id", "Typename", "typeId") ;
+
+
+
             return View();
         }
 
-        // POST: PortfolioItems/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: TeamMemberController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(PortfolioViewModel model)
+        public ActionResult Create(PortfoliocreateViewModel Model)
         {
+
             if (ModelState.IsValid)
             {
-                if (model.File != null)
+
+                if (Model.File != null)
                 {
-                    string uploads = Path.Combine(_hosting.WebRootPath, @"img\portfolio");
-                    string fullPath = Path.Combine(uploads, model.File.FileName);
-                    model.File.CopyTo(new FileStream(fullPath, FileMode.Create));
+                    string uploads = Path.Combine(_hosting.WebRootPath, @"AdminRoot\img\protofileitem");
+                    string fullPath = Path.Combine(uploads, Model.Id+Model.NameCatogry + Model.File.FileName);
+                    Model.File.CopyTo(new FileStream(fullPath, FileMode.Create));
                 }
 
-                PortfolioItem portfolioItem = new PortfolioItem
+
+                var protofileitem = new PortfolioItem
                 {
-                   /* ProjectName = model.ProjectName*/
-                    Description = model.Description,
-                    ImageUrl = model.File.FileName
+                    Price = Model.Price,
+                    Company=Model.Company,
+                    Namecatogry=Model.NameCatogry,
+                    typeId=Model.typeId,
+                    Title=Model.Title,
+                    Date=Model.Date,
+                    Description=Model.Description,
+                    location=Model.location,
+                    gendertype=Model.Gender,
+
+                    ImageUrl = Model.Id + Model.NameCatogry + Model.File.FileName
+
                 };
 
-                _portfolio.Entity.Insert(portfolioItem);
+
+
+                _portfolio.Entity.Insert(protofileitem);
                 _portfolio.Save();
-                return RedirectToAction(nameof(Index));
+
+
+
+                return RedirectToAction("Index");
+
             }
 
-            return View(model);
+
+            ViewBag.GenderName = new SelectList(GenderName, "Value", "Name");
+
+
+            ViewBag.CatogreName = new SelectList(_Typecatogry.Entity.GetAll(), "Id", "Typename", "typeId");
+
+
+            return View(Model);
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         // GET: PortfolioItems/Edit/5
         public IActionResult Edit(Guid? id)
@@ -93,19 +157,33 @@ namespace Web.Controllers
                 return NotFound();
             }
 
-            var portfolioItem = _portfolio.Entity.GetById(id);
-            if (portfolioItem == null)
+            var Model = _portfolio.Entity.GetById(id);
+            if (Model == null)
             {
                 return NotFound();
             }
 
-            PortfolioViewModel portfolioViewModel = new PortfolioViewModel
-            {
-                Id = portfolioItem.Id,
-                Description = portfolioItem.Description,
-                ImageUrl = portfolioItem.ImageUrl
-                //ProjectName = portfolioItem.ProjectName
+           PortfoliEditViewModel portfolioViewModel = new PortfoliEditViewModel
+           {
+                Price = Model.Price,
+                Company = Model.Company,
+                NameCatogry = Model.Namecatogry,
+                typeId = Model.typeId,
+                Title = Model.Title,
+                Date = Model.Date,
+                Description = Model.Description,
+                location = Model.location,
+                Gender = Model.gendertype,
+                ImageUrl = Model.ImageUrl
+
             };
+
+            ViewBag.GenderName = new SelectList(GenderName, "Value", "Name");
+
+
+            ViewBag.CatogreName = new SelectList(_Typecatogry.Entity.GetAll(), "Id", "Typename", "typeId");
+
+
 
             return View(portfolioViewModel);
         }
@@ -115,77 +193,83 @@ namespace Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Guid id, PortfolioViewModel model)
+        public IActionResult Edit( PortfoliEditViewModel Model)
         {
-            if (id != model.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
+                var ImageValue = Model.ImageUrl;
+                if (Model.File != null)
                 {
-                    if (model.File != null)
-                    {
-                        string uploads = Path.Combine(_hosting.WebRootPath, @"img\portfolio");
-                        string fullPath = Path.Combine(uploads, model.File.FileName);
-                        model.File.CopyTo(new FileStream(fullPath, FileMode.Create));
-                    }
-
-                    PortfolioItem portfolioItem = new PortfolioItem
-                    {
-                        Id = model.Id,
-                        //ProjectName = model.ProjectName,
-                        Description = model.Description,
-                        ImageUrl = model.File.FileName
-                    };
-
-                    _portfolio.Entity.Update(portfolioItem);
-                    _portfolio.Save();
+                    string uploads = Path.Combine(_hosting.WebRootPath, @"AdminRoot\img\protofileitem");
+                    string fullPath = Path.Combine(uploads, Model.Id + Model.NameCatogry + Model.File.FileName);
+                    ImageValue = Model.Id + Model.NameCatogry + Model.File.FileName;
+                    Model.File.CopyTo(new FileStream(fullPath, FileMode.Create));
                 }
-                catch (DbUpdateConcurrencyException)
+
+
+                var protofileitem = new PortfolioItem
                 {
-                    if (!PortfolioItemExists(model.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                   Id=Model.Id,
+                    Price = Model.Price,
+                    Company = Model.Company,
+                    Namecatogry = Model.NameCatogry,
+                    typeId = Model.typeId,
+                    Title = Model.Title,
+                    Date = Model.Date,
+                    Description = Model.Description,
+                    location = Model.location,
+                    gendertype = Model.Gender,
+
+                    ImageUrl = ImageValue
+
+                };
+
+
+
+                _portfolio.Entity.Update(protofileitem);
+                _portfolio.Save();
+
+
+
+                return RedirectToAction("Index");
+
             }
-            return View(model);
+
+
+            ViewBag.GenderName = new SelectList(GenderName, "Value", "Name");
+
+
+            ViewBag.CatogreName = new SelectList(_Typecatogry.Entity.GetAll(), "Id", "Typename", "typeId");
+
+            return View(Model);
+
         }
 
         // GET: PortfolioItems/Delete/5
-        public IActionResult Delete(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var portfolioItem = _portfolio.Entity.GetById(id);
-            if (portfolioItem == null)
-            {
-                return NotFound();
-            }
-
-            return View(portfolioItem);
-        }
 
         // POST: PortfolioItems/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(Guid id)
-        {
-            _portfolio.Entity.Delete(id);
-            _portfolio.Save();
-            return RedirectToAction(nameof(Index));
-        }
+
+
+        public ActionResult Delete(Guid Id)
+
+            {
+                if (Id != null)
+                {
+                     _portfolio.Entity.Delete(Id);
+                    _portfolio.Save();
+                    return RedirectToAction("Index");
+
+                }
+                return View("ItemNotfound");
+            }
+
+           
+           
+        
+
+
+
 
         private bool PortfolioItemExists(Guid id)
         {

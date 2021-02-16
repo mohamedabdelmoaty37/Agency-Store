@@ -1,41 +1,207 @@
-﻿@model PortfolioViewModel
+﻿@model Web.ViewModels.PortfoliocreateViewModel
 
 @{
     ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+
+
 }
 
-<div  style="margin:160px; padding:120px;">
-    <h1>Create</h1>
+ 
 
-    <h4>PortfolioItem</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="Create" enctype="multipart/form-data">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="ProjectName" class="control-label"></label>
-                    <input asp-for="ProjectName" class="form-control" />
-                    <span asp-validation-for="ProjectName" class="text-danger"></span>
+<html lang="en">
+
+<head>
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title> Create</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="~/css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block ">
+                        <img src="~/assets/img/register.jpg " style="height:850px; width:500px ;" alt="login " />
+
+                    </div>
+
+
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="btn  btn-user btn-info  " style="width:530px"> Creat New Item!</h1>
+                            </div>
+                            <form class="user" asp-action="Create" method="post" enctype="multipart/form-data">
+
+
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" asp-for="NameCatogry"
+                                           placeholder="NameCatogry...">
+                                    <span asp-validation-for="NameCatogry" class="text-danger"></span>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" asp-for="Title"
+                                           placeholder="Title...">
+                                    <span asp-validation-for="Title" class="text-danger"></span>
+                                </div>
+                               
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" asp-for="Company"
+                                           placeholder="Company Name...">
+                                    <span asp-validation-for="Company" class="text-danger"></span>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" asp-for="location"
+                                           placeholder="location...">
+                                    <span asp-validation-for="location" class="text-danger"></span>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" asp-for="Price"
+                                           placeholder="Price...">
+                                    <span asp-validation-for="Price" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <textarea class="form-control form-control-user" asp-for="Description"
+                                              placeholder="Description...">
+                                    </textarea>
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                </div>
+
+
+                                <div class="row">
+
+                                    <div class=" col-6 form-group">
+                                        <label class="col-12 " style="text-size-adjust:auto ;margin-left:13px ;color:black"> Select Date  : </label>
+
+                                        <input type="date" class="form-control form-control-user" asp-for="Date"
+                                               placeholder="Price...">
+                                        <span asp-validation-for="Date" class="text-danger"></span>
+                                    </div>
+
+
+
+                                    <div class="col-6 form-group ">
+                                        <label class="col-12 " style="text-size-adjust:auto ;margin-left:13px ;color:black"> Select Images  : </label>
+
+                                        <input type="file" class="form-control form-control-user " asp-for="File">
+                                        <span asp-validation-for="File" class="text-danger"></span>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+
+                                    <div class=" col-6 form-group">
+                                        <label class="col-8 " style="text-size-adjust:auto ;margin-left:13px ;color:black"> Select Gender  : </label>
+
+                                        <select class="form-control " asp-for="Gender" asp-items="@ViewBag.GenderName">
+                                            <option value=""> choice Please  </option>
+                                        </select>
+                                        <span asp-validation-for="Gender" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-6 form-group">
+                                        <label class="col-12 " style="text-size-adjust:auto ;margin-left:13px ;color:black"> Select Type of Catogry  : </label>
+
+                                        <select class="form-control " asp-for="typeId" asp-items="@ViewBag.CatogreName">
+                                            <option value=""> choice Please  </option>
+                                        </select>
+                                        <span asp-validation-for="Gender" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+
+
+
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                <hr>
+                                <div style="margin-left:100px ;margin-top:30px">
+                                    <button type="submit" class="btn btn-success btn-lg ">  <i class="fa fa-check "> </i> Create  </button>
+                                    <a asp-action="Index" class="btn btn-danger btn-lg" asp-controller="PortfolioItems">  <i class="fa fa-exclamation-circle "> </i> Back to List</a>
+                                </div>
+
+                            </form>
+
+
+
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Description" class="control-label"></label>
-                    <input asp-for="Description" class="form-control" />
-                    <span asp-validation-for="Description" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ImageUrl" class="control-label"></label>
-                    <input type="file" asp-for="File" class="form-control" />
-                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
-            </form>
+            </div>
         </div>
+
     </div>
 
-    <div>
-        <a asp-action="Index"  class="btn btn-outline-dark">Back to List</a>
-    </div>
-</div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    Core plugin JavaScript
+    <script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    Custom scripts for all pages
+    <script src="~/js/sb-admin-2.min.js"></script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

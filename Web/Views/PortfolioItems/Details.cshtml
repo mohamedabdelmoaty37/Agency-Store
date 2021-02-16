@@ -1,39 +1,195 @@
 ﻿@model Core.Entities.PortfolioItem
 
-@{
-    ViewData["Title"] = "Details";
-}
+@inject Core.Interfaces.IUnitOfWork<Typecat> catogry
 
-<div style="margin:160px; padding:120px;">
-    <h1>Details</h1>
+@{ ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml"; }
 
-    <div>
-        <h4>PortfolioItem</h4>
-        <hr />
-        <dl class="row">
-            <dt class="col-sm-2">
-          
-            </dt>
-            <dd class="col-sm-10">
-               
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Description)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Description)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.ImageUrl)
-            </dt>
-            <dd class="col-sm-10">
-                <img src="~/img/portfolio/@Model.ImageUrl" class="img-thumbnail" style="width:64px; height:64px;" />
-            </dd>
-        </dl>
-    </div>
-    <div>
-        <a asp-action="Edit" class="btn btn-dark" asp-route-id="@Model.Id">Edit</a> |
-        <a asp-action="Index" class="btn btn-outline-dark">Back to List</a>
+
+
+<div class="card">
+
+    <div class="card-header">
+        <h4>   Detalis Item of PortfolIoitems</h4>
     </div>
 
+    <div class="card-body  ">
+
+
+
+        <div class="table-responsive " style="margin-left:130px ;margin-top:30px">
+
+
+
+            <table class="table table-bordered" style="width:70%">
+                <thead>
+                    <tr>
+                        <th style="width:30%">
+                            Item
+                        </th>
+                        <th style="width:70%">
+                            Value
+                        </th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+
+
+
+                    <tr>
+                        <td style="width:30%">
+                            @Html.DisplayNameFor(model => model.Namecatogry)
+                        </td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.Namecatogry)
+                        </td>
+
+                    </tr>
+
+
+                    @{var catogryvalue = catogry.Entity.GetAll().Where(x => x.Id == Model.typeId).Select(x => x.Typename).FirstOrDefault(); }
+
+                    <tr>
+                        <td style="width:30%">
+                            @Html.DisplayNameFor(model => model.typeId)
+                        </td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => catogryvalue)
+                        </td>
+                    </tr>
+
+
+
+
+                    <tr>
+                        <td style="width:30%">
+                            @Html.DisplayNameFor(model => model.Title)
+                        </td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.Title)
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td style="width:30%">
+                            @Html.DisplayNameFor(model => model.Description)
+                        </td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.Description)
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr>
+                        <td style="width:30%">
+                            @Html.DisplayNameFor(model => model.Company)
+                        </td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.Company)
+                        </td>
+
+                    </tr>
+
+
+
+
+                    <tr>
+                        <td style="width:30%">
+                            @Html.DisplayNameFor(model => model.location)
+                        </td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.location)
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+                        <td style="width:30%">
+                            @Html.DisplayNameFor(model => model.Price)
+                        </td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.Price)
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td style="width:30%">
+                            @Html.DisplayNameFor(model => model.Date)
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.Date.Day)/     @Html.DisplayFor(model => model.Date.Month)/     @Html.DisplayFor(model => model.Date.Year)
+
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr>
+                        <td style="width:30%">
+                            @Html.DisplayNameFor(model => model.gendertype)
+                        </td>
+                        <td style="width:70%">
+                            @Html.DisplayFor(model => model.gendertype)
+
+                        </td>
+
+                    </tr>
+
+
+
+
+
+
+                    <tr>
+                        <td style="width:30%">
+                            @Html.DisplayNameFor(model => model.ImageUrl)
+                        </td>
+                        <td style="width:70%">
+                            <img src="~/AdminRoot/img/protofileitem/@Model.ImageUrl" alt="Null Image" style="width:200px; height:200px " />
+                        </td>
+
+                    </tr>
+
+
+
+
+
+                </tbody>
+            </table>
+
+        </div>
+
+
+    </div>
+    <div class="card-footer">
+        <div style="margin-left:400px">
+            <a class="btn btn-success btn-lg " asp-action="Edit" asp-controller="PortfolIoitems" asp-route-id="@Model.Id">  <i class="fa fa-check "> </i> Edit </a>
+            <a asp-action="Index" class="btn btn-danger btn-lg" asp-controller="PortfolIoitems">  <i class="fa fa-exclamation-circle "> </i> Back to List</a>
+        </div>
+    </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

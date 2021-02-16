@@ -145,8 +145,8 @@ namespace Web.Controllers.Admin_Controller
                     if (model.File != null)
                     {
                         string uploads = Path.Combine(_hosting.WebRootPath, @"AdminRoot\img\Teammember");
-                        string fullPath = Path.Combine(uploads, model.FullName + model.File.FileName);
-                        ImageValue = model.File.FileName;
+                        string fullPath = Path.Combine(uploads,  model.FullName + model.File.FileName);
+                        ImageValue = model.FullName + model.File.FileName;
                         model.File.CopyTo(new FileStream(fullPath, FileMode.Create));
 
                     }
