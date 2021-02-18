@@ -60,22 +60,27 @@
 
                             @foreach (var item in Model)
                             {
+                               
+
+                            <tr>
+                                @*<input id="roleid" type="hidden" value="@item.Id" />
+                                <input id="roleName" type="hidden" value="@item.Name" />*@
+                                <td width="10px" style="background-color:rgba(0,0,0,.15)">
+                                    @( indexer=indexer+1)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
 
 
-                                <tr>
-                                    <td width="10px" style="background-color:rgba(0,0,0,.15)">
-                                        @( indexer=indexer+1)
-                                    </td>
 
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Name)
-                                    </td>
+                                <td style="width:400px">
+                                    <button class=" btn btn-info btn-circle btn-lg" onclick="funEdit(id = @item.Id,Name= '@item.Name')"    >
+                                        <i class="fa fa-check"></i> </button>
+                                        <a asp-action="Delete" asp-controller="Roles" class=" btn btn-danger btn-circle btn-lg" onclick=" return confirm(' Are you sure to Delete this Item')" asp-route-id="@item.Id"> <i class="fa fa-trash"></i></a>
 
-                                    <td style="width:400px">
-                                        <a asp-action="Edit" asp-controller="User" class=" btn btn-info btn-circle btn-lg" asp-route-id="@item.Id"> <i class="fa fa-check"></i> </a>
-                                        <a asp-action="Delete" asp-controller="User" class=" btn btn-danger btn-circle btn-lg" onclick=" return confirm(' Are you sure to Delete this Item')" asp-route-id="@item.Id"> <i class="fa fa-trash"></i></a>
-
-                                        <a href="#" class="btn btn-secondary btn-icon-split ">
+                                        <a asp-action="EditUserRoles" asp-route-roleId="@item.Id" class="btn btn-secondary btn-icon-split ">
                                             <span class="icon text-white-50">
 
                                                 <i class="fas fa-fw fa-cog"></i>
@@ -84,8 +89,9 @@
                                         </a>
 
 
-                                    </td>
-                                </tr>
+                             </td>
+                            </tr>
+
                             }
                         </tbody>
                     </table>
@@ -99,6 +105,16 @@
                         <partial name="CreateEditView"> </partial>
                     </div>
 
+
+                    <div id="Editpage" style="display:none">
+
+                        
+
+
+                        <partial name="Edit" > </partial>
+                    </div>
+
+
                 </div>
 
 
@@ -107,7 +123,7 @@
 
 
 
-
+       
 
 
 
@@ -119,9 +135,37 @@
         @section scripts {
 
             <script>
+
+                function funEdit(id,Name)
+                {
+
+                    var x = document.getElementById("createpage");
+                    if (x.style.display != "none") {
+                        x.style.display = "none";
+                    }
+                    var x = document.getElementById("Editpage");
+                    if (x.style.display === "none") {
+                        x.style.display = "block";
+                    } else {
+                        x.style.display = "none";
+                    }
+
+
+                    $("#EditName").val(Name);
+                    
+                    $("#EditId").val(id);
+                  
+                  
+                }
+
+
                 $("#target").click(function () {
                    
-                 
+                    var x = document.getElementById("Editpage");
+                    if (x.style.display != "none") {
+                        x.style.display = "none";
+                    }
+
 
                     var x = document.getElementById("createpage");
                     if (x.style.display === "none") {
@@ -136,6 +180,10 @@
 
                    
                 });
+
+
+
+
             </script>
 
          

@@ -1,0 +1,53 @@
+﻿
+
+  <table class="table table-bordered" id="dataTable" style="width:80% " cellspacing="0">
+     
+
+    <tbody>
+
+        <tr style="background-color:darkgrey">
+            <td>
+              Edit Role
+            </td>
+
+
+        </tr>
+
+
+
+        <tr>
+            <td>
+
+
+                <form class="user" asp-action="Edit" method="post">
+
+
+                    <input type="hidden" name="Id" id="EditId" value="" />
+                    <div class=" col-8 form-group">
+                        <label class="col-6" style="text-size-adjust:auto ;margin-left:13px ;color:gray">  Role Name : </label>
+
+
+                        <input type="text" name="RoleName" id="EditName" value="" class="form-control form-control-user"
+                               placeholder=" RoleName...">
+                        <span class="text-danger"></span>
+                    </div>
+
+
+
+                    <hr />
+
+                    <div style="margin-left:100px ;margin-top:30px">
+                        <button type="submit" class="btn btn-success">  <i class="fa fa-check "> </i> Edit </button>
+                        <a asp-action="Index" class="btn btn-danger" asp-controller="Roles">  <i class="fa fa-exclamation-circle "> </i> Close </a>
+                    </div>
+                </form>
+            </td>
+        </tr>
+
+    </tbody>
+
+
+
+
+
+</table>

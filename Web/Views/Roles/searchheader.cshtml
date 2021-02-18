@@ -1,0 +1,49 @@
+﻿
+
+
+<div class="card-header">
+    <h2>Add or remove users from this role</h2>
+
+
+
+    <div class="form-group">
+
+
+        <div class=" col-6 form-group">
+            <label class="col-6" style="text-size-adjust:auto ;margin-left:13px ;color:gray"> Search By Email  : </label>
+
+
+            <input type="text"  class="form-control form-control-user"
+                   onkeyup="search()" placeholder=" Enter Email..." id="searchId">
+
+
+
+        </div>
+    </div>
+
+</div>
+
+
+
+@section scripts {
+
+    <script>
+
+
+        function search() {
+
+            var value = $("#searchId").val();
+            var roleValue = $("#roleId").val();
+
+            $.get('@Url.Action("SearchEmail", "Roles")', { Email: value, roleId: roleValue });
+
+
+
+        }
+
+
+    </script>
+
+
+}
+
