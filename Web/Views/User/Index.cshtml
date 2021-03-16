@@ -99,7 +99,7 @@
                                     <a asp-action="Details" asp-controller="User"  class=" btn btn-warning btn-circle btn-lg" asp-route-id="@item.Id"> <i class="fa fa-info-circle "></i></a>
                                     <a asp-action="Delete" asp-controller="User" class=" btn btn-danger btn-circle btn-lg" onclick=" return confirm(' Are you sure to Delete this Item')" asp-route-id="@item.Id"> <i class="fa fa-trash"></i></a>
 
-                                    <a href="#" class="btn btn-secondary btn-icon-split ">
+                                    <a asp-action="ManageUserRoles" asp-controller="User" asp-route-id="@item.Id" class="btn btn-secondary btn-icon-split ">
                                         <span class="icon text-white-50">
 
                                             <i class="fas fa-fw fa-cog"></i>

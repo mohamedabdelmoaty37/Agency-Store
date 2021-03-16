@@ -21,17 +21,21 @@ namespace Web.Controllers.Admin_Controller
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IUnitOfWork<ApplicationUser> _User;
+        private readonly RoleManager<IdentityRole> _RoleManager;
         [Obsolete]
         private readonly IHostingEnvironment _hosting;
+        private readonly IUnitOfWork<IdentityRole> _Role;
 
         [Obsolete]
-        public UserController(IHostingEnvironment hosting, SignInManager<ApplicationUser> signInManager, IUnitOfWork<ApplicationUser> User, UserManager<ApplicationUser> userManager
+        public UserController(IHostingEnvironment hosting, IUnitOfWork<IdentityRole> Role, RoleManager<IdentityRole> RoleManager, SignInManager<ApplicationUser> signInManager, IUnitOfWork<ApplicationUser> User, UserManager<ApplicationUser> userManager
             )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _User = User;
             _hosting = hosting;
+            _RoleManager = RoleManager;
+            _Role = Role;
 
         }
 
@@ -60,6 +64,93 @@ namespace Web.Controllers.Admin_Controller
             
             return View(User);
         }
+
+
+        public ActionResult GetRoles(string id )
+
+        {
+
+            return View();
+        }
+
+
+
+        [HttpGet]
+        public async Task<IActionResult> ManageUserRoles(string id)
+        {
+            ViewBag.userId = id;
+
+            var user = await _userManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+               
+                return NotFound();
+            }
+
+            var model = new List<UserRolesViewModel>();
+
+            foreach (var role in _Role.Entity.GetAll())
+            {
+                var userRolesViewModel = new UserRolesViewModel
+                {
+                    RoleId = role.Id,
+                    RoleName = role.Name
+                };
+
+                if (await _userManager.IsInRoleAsync(user, role.Name))
+                {
+                    userRolesViewModel.IsSelected = true;
+                }
+                else
+                {
+                    userRolesViewModel.IsSelected = false;
+                }
+
+                model.Add(userRolesViewModel);
+            }
+
+            return View(model);
+        }
+
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> ManageUserRoles(List<UserRolesViewModel> model, string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+               
+                return NotFound();
+            }
+
+            var roles = await _userManager.GetRolesAsync(user);
+            var result = await _userManager.RemoveFromRolesAsync(user, roles);
+
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError("", "Cannot remove user existing roles");
+                return View(model);
+            }
+
+            result = await _userManager.AddToRolesAsync(user,
+                model.Where(x => x.IsSelected).Select(y => y.RoleName));
+
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError("", "Cannot add selected roles to user");
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+
+
+
 
         // GET: UserController/Create
         public ActionResult Create()
