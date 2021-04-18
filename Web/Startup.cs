@@ -45,8 +45,22 @@ namespace Web
             //                .AddDefaultUI();
 
 
+          
             services.AddControllersWithViews();
-            
+
+            services.AddAuthentication().AddGoogle(options =>
+            {
+                options.ClientId = "984067988014-uu7njn7bdvnug1o29ukcuihqrf2qqgba.apps.googleusercontent.com";
+                options.ClientSecret = "3CUz3-8-4bV1w0oeKKfMKQWd";
+            })
+            .AddFacebook(options =>
+            {
+                options.AppId = "260516845560295";
+                options.AppSecret = "b420384623e0a7e5d56bebfcca17ae63";
+            });
+             
+
+
             services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>)) ;
             services.AddRazorPages();
    

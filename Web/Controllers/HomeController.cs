@@ -11,22 +11,29 @@ namespace Web.Controllers
 {
     public class HomeController : Controller
     {
-        // private readonly IUnitOfWork<Owner> _owner;
+        
         private readonly IUnitOfWork<PortfolioItem> _portfolio;
-         /* IUnitOfWork<Owner> owner*/
+        private readonly IUnitOfWork<TeamMember> _TeamMember;
+        private readonly IUnitOfWork<Typecat> _Catogry;
+
         public HomeController(
           
-            IUnitOfWork<PortfolioItem> portfolio)
+            IUnitOfWork<PortfolioItem> portfolio, IUnitOfWork<Typecat> Catogry, IUnitOfWork<TeamMember> TeamMember)
         {
-          //  _owner = owner;
+         
             _portfolio = portfolio;
+            _TeamMember = TeamMember;
+            _Catogry = Catogry;
         }
         public IActionResult Index()
         {
             var homeViewModel = new HomeViewModel
             {
-              //  Owner = _owner.Entity.GetAll().First(),
-                PortfolioItems = _portfolio.Entity.GetAll().ToList()
+              
+                PortfolioItems = _portfolio.Entity.GetAll().ToList(),
+                TeamMembers = _TeamMember.Entity.GetAll().ToList(),
+                Catogry=_Catogry.Entity.GetAll().ToList()
+
             };
 
             return View(homeViewModel);

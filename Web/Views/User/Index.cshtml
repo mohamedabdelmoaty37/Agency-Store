@@ -40,7 +40,7 @@
                                     N
                                 </th>
 
-                                <th>
+                                <th width="80px">
                                     @Html.DisplayNameFor(model => model.UserName)
                                 </th>
                                 <th>
@@ -58,7 +58,7 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.Address)
                                 </th>
-                                <th width="450px">Manage options</th>
+                                <th width="600">Manage options</th>
                             </tr>
                         </thead>
 
@@ -74,7 +74,7 @@
                                    @( indexer=indexer+1)
                                 </td>
 
-                                <td>
+                                <td width="80px">
                                     @Html.DisplayFor(modelItem => item.UserName)
                                 </td>
                                 <td>
@@ -94,12 +94,12 @@
                                     @Html.DisplayFor(modelItem => item.Address)
                                 </td>
 
-                                <td style="width:400px">
+                                <td width="600px">
                                     <a asp-action="Edit" asp-controller="User"  class=" btn btn-info btn-circle btn-lg" asp-route-id="@item.Id"> <i class="fa fa-check"></i> </a>
                                     <a asp-action="Details" asp-controller="User"  class=" btn btn-warning btn-circle btn-lg" asp-route-id="@item.Id"> <i class="fa fa-info-circle "></i></a>
                                     <a asp-action="Delete" asp-controller="User" class=" btn btn-danger btn-circle btn-lg" onclick=" return confirm(' Are you sure to Delete this Item')" asp-route-id="@item.Id"> <i class="fa fa-trash"></i></a>
 
-                                    <a asp-action="ManageUserRoles" asp-controller="User" asp-route-id="@item.Id" class="btn btn-secondary btn-icon-split ">
+                                    <a asp-action="ManageUserRoles" asp-controller="User"  asp-route-id="@item.Id" class="btn btn-sm btn-secondary btn-icon-split ">
                                         <span class="icon text-white-50">
 
                                             <i class="fas fa-fw fa-cog"></i>

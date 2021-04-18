@@ -8,7 +8,11 @@ namespace Web.ViewModels
 {
     public class HomeViewModel
     {
-       // public Owner Owner { get; set; }
+       
         public List<PortfolioItem> PortfolioItems { get; set; }
+
+        public List<TeamMember> TeamMembers { get; set; }
+
+        public List<Typecat> Catogry { get; set; }
     }
 }

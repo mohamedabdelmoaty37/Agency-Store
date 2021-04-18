@@ -73,19 +73,13 @@
 
                                         <div class="form-group">
 
-                                           
+
                                         </div>
-                                            <div class="form-group">
-                                                <div class="custom-control custom-checkbox small">
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox small">
 
-                                                    <input style="height:15px; width :15px " type="checkbox" asp-for="RememberMe">
-                                                    <label   for="RememberMe">RememberMe ? </label><br>
-
-
-    
-                                                </div>
-
-
+                                                <input style="height:15px; width :15px " type="checkbox" asp-for="RememberMe">
+                                                <label for="RememberMe">RememberMe ? </label><br>
 
 
 
@@ -95,6 +89,7 @@
 
 
 
+                                        </div>
 
 
 
@@ -102,18 +97,72 @@
 
 
 
-                                            <hr>
 
-                                            <button type="submit" class="btn btn-primary btn-user btn-block"> Login</button>
-                      
+
+
+
+
+                                        <hr>
+
+                                        <button type="submit" class="btn btn-primary btn-user btn-block"> Login</button>
+
                                     </form>
-                                    <hr>
-                                    @*<div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                    </div>*@
                                     <div class="text-center">
-                                        <a class="small btn btn-google" asp-action="Register">Create an Account!</a>
+                                        <a class="" asp-action="Register">Create an Account!</a>
                                     </div>
+                                    <hr>
+
+
+                                    @if (Model.ExternalLogins.Count == 0)
+                                    {
+                                        <div>No external logins configured</div>
+                                    }
+                                    else
+                                    {
+
+                                        <div> External login </div>
+                                        <form method="post" asp-action="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl">
+                                            <div>
+
+
+
+
+                                                @foreach (var provider in Model.ExternalLogins)
+                                                {
+                                                    if (provider.DisplayName == "Google")
+                                                    {
+                                                        <button type="submit" class="btn btn-google btn-user btn-block"
+                                                                name="provider" value="@provider.Name"
+                                                                title="Log in using your @provider.DisplayName account">
+                                                            Signin With @provider.DisplayName
+                                                        </button>
+                                                    }
+                                                    else
+                                                    {
+
+                                                        <button type="submit" class="btn btn-facebook btn-user btn-block"
+                                                                name="provider" value="@provider.Name"
+                                                                title="Log in using your @provider.DisplayName account">
+                                                            Signin With @provider.DisplayName
+                                                        </button>
+
+                                                    }
+
+
+
+
+                                                }
+                                            </div>
+                                        </form>
+
+
+
+
+                                    }
+
+
+
+
                                 </div>
                             </div>
                         </div>
